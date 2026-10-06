@@ -91,7 +91,7 @@
   if(lenis){lenis.on('scroll',ST.update);g.ticker.add(function(t){lenis.raf(t*1000);});g.ticker.lagSmoothing(0);}
   var quart='power4.out';
   /* opening: headline rows rise; film stays contained/letterboxed in its window */
-  g.from('.hero-card .ln>*',{yPercent:110,duration:1.4,ease:quart,stagger:1,delay:0.2});
+  g.from('.hero-card .ln>*',{yPercent:120,duration:1.4,ease:quart,stagger:1,delay:0.2});
   /* split scroll: media drift inside its frame; headline rows rise when the copy arrives */
   g.utils.toArray('.m').forEach(function(f){
     var el=f.querySelector('img,video');
@@ -99,7 +99,7 @@
   });
   g.utils.toArray('.split, .club').forEach(function(s){
     var rows=s.querySelectorAll('.disp .ln>*');
-    g.from(rows,{yPercent:110,duration:1.2,ease:quart,stagger:0.09,scrollTrigger:{trigger:s,start:'top 70%'}});
+    g.from(rows,{yPercent:120,duration:1.2,ease:quart,stagger:0.09,scrollTrigger:{trigger:s,start:'top 70%'}});
     g.from(s.querySelectorAll('.split-in>p, .acts, .club-head p, .rooms p'),{y:28,opacity:0,duration:1.1,ease:quart,stagger:0.08,scrollTrigger:{trigger:s,start:'top 60%'}});
   });
   g.utils.toArray('.strip img').forEach(function(im){

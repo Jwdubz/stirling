@@ -22,8 +22,8 @@ a{color:inherit}
 .disp em{font-style:italic;text-transform:none;letter-spacing:-.02em;color:var(--gold-type);font-weight:400}
 .disp em .caps{text-transform:uppercase}
 .hero-card .disp .ln .caps.gold{text-transform:uppercase;font-style:normal;color:var(--gold-type);letter-spacing:-.02em;white-space:nowrap}
-.ln{display:block;overflow:hidden;padding:.22em .08em .42em .04em;margin:-.08em 0}
-.ln>*{display:inline-block}
+.ln{display:block;overflow:hidden;padding:0 .1em;margin:-.08em 0}
+.ln>*{display:block;padding:.16em 0 .3em;will-change:transform}
 
 /* mast: small solid pills, never a gradient over the film */
 .mast{position:fixed;z-index:50;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:calc(var(--edge)*.72) var(--edge);pointer-events:none}
@@ -103,7 +103,8 @@ html.is-paused .loop{}
   .mast nav a.act{min-height:44px;min-width:44px;padding:0 16px}
   .hero-card{margin-top:0;min-height:0;padding:16px var(--edge) max(56px,calc(env(safe-area-inset-bottom) + 48px)) var(--edge)}
   .hero-card .disp{font-size:clamp(34px,9.6vw,52px);line-height:.92;max-width:100%}
-  .hero-card .disp .ln{padding:.14em .06em .28em .02em}
+  .hero-card .disp .ln{padding:0 .06em;margin:-.06em 0}
+  .hero-card .disp .ln>*{padding:.12em 0 .24em}
   .split,.split[data-side="right"]{grid-template-columns:1fr}
   .split[data-side="right"] .split-copy{order:0}
   .split-in{position:relative;height:auto;padding:56px var(--edge) 24px;gap:16px}
