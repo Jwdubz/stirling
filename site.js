@@ -86,7 +86,7 @@
   if(lenis){lenis.on('scroll',ST.update);g.ticker.add(function(t){lenis.raf(t*1000);});g.ticker.lagSmoothing(0);}
   var quart='power4.out';
   /* opening: headline rows rise; film stays contained/letterboxed in its window */
-  g.from('.hero-card .ln>*',{yPercent:110,duration:1.4,ease:quart,stagger:0.1,delay:0.2});
+  g.from('.hero-card .ln>*',{yPercent:110,duration:1.4,ease:quart,stagger:1,delay:0.2});
   /* split scroll: media drift inside its frame; headline rows rise when the copy arrives */
   g.utils.toArray('.m').forEach(function(f){
     var el=f.querySelector('img,video');
