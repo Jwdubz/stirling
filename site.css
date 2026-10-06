@@ -1,7 +1,7 @@
 /* Stirling Club concept, pass 2 (2026-10-06). Idiom extracted from Amrit Palace (Awwwards SOTD, 15 Nov 2025); our own code. */
 @font-face{font-family:"Playfair Display";src:url(assets/fonts/PlayfairDisplay.ttf) format("truetype");font-weight:400 900;font-style:normal;font-display:block}
 @font-face{font-family:"Playfair Display";src:url(assets/fonts/PlayfairDisplay-Italic.ttf) format("truetype");font-weight:400 900;font-style:italic;font-display:block}
-@font-face{font-family:"Pinyon Script";src:url(assets/fonts/PinyonScript-Regular.ttf) format("truetype");font-weight:400;font-style:normal;font-display:block}
+@font-face{font-family:"Tangerine";src:url(assets/fonts/Tangerine-Regular.ttf) format("truetype");font-weight:400;font-style:normal;font-display:block}
 @font-face{font-family:"Newsreader";src:url(assets/fonts/Newsreader.ttf) format("truetype");font-weight:200 800;font-style:normal;font-display:block}
 @font-face{font-family:"Newsreader";src:url(assets/fonts/Newsreader-Italic.ttf) format("truetype");font-weight:200 800;font-style:italic;font-display:block}
 :root{
@@ -44,7 +44,7 @@ a{color:inherit}
 .hero-card{position:relative;z-index:2;flex:0 0 auto;margin-top:0;min-height:0;background:var(--ink);padding:clamp(18px,2.2vw,36px) max(var(--edge),160px) clamp(22px,2.8vw,44px) var(--edge);border-top:1px solid rgba(200,162,76,.5)}
 .hero-card .disp{font-size:clamp(40px,6.4vw,110px);line-height:.96;max-width:100%}
 .hero-card .disp .ln:first-child em{color:var(--paper);text-transform:uppercase;letter-spacing:-.03em}
-.hero-card .disp .ln .title,.hero-card .disp .ln em.title{font-family:"Pinyon Script",cursive;text-transform:none;font-style:normal;font-weight:400;color:var(--paper);letter-spacing:.01em;line-height:1.15;font-size:clamp(56px,8.4vw,148px)}
+.hero-card .disp .ln .title,.hero-card .disp .ln em.title{font-family:"Tangerine",cursive;text-transform:none;font-style:normal;font-weight:400;color:var(--paper);letter-spacing:.01em;line-height:1.15;font-size:clamp(56px,8.4vw,148px)}
 .hero-card .disp .ln:last-child > span{color:var(--gold-type);font-style:normal;text-transform:none;letter-spacing:-.02em}
 .hero-foot{display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap;margin-top:clamp(10px,1.4vw,20px);max-width:100%}
 .hero-foot p{margin:0;flex:1 1 28ch;max-width:min(40ch,100%);color:var(--cream);font-size:clamp(14px,1.15vw,17px)}
