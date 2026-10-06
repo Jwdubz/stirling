@@ -60,7 +60,6 @@
   var quart='power4.out';
   /* opening: headline rows rise; film stays cover full-bleed in its window */
   g.from('.hero-card .ln>*',{yPercent:110,duration:1.4,ease:quart,stagger:0.1,delay:0.2});
-  g.from('.hero-foot',{y:24,opacity:0,duration:1.2,ease:quart,delay:0.55});
   /* split scroll: media drift inside its frame; headline rows rise when the copy arrives */
   g.utils.toArray('.m').forEach(function(f){
     var el=f.querySelector('img,video');
