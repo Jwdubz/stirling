@@ -43,6 +43,7 @@ a{color:inherit}
 .hero-card{position:relative;z-index:2;flex:0 0 auto;margin-top:0;min-height:0;background:var(--ink);padding:clamp(18px,2.2vw,36px) max(var(--edge),160px) clamp(22px,2.8vw,44px) var(--edge);border-top:1px solid rgba(200,162,76,.5)}
 .hero-card .disp{font-size:clamp(40px,6.4vw,110px);line-height:.96;max-width:100%}
 .hero-card .disp .ln:first-child em{color:var(--paper);text-transform:uppercase;letter-spacing:-.03em}
+.hero-card .disp .ln .title{text-transform:none;font-style:normal;color:var(--paper);letter-spacing:-.03em}
 .hero-card .disp .ln:last-child > span{color:var(--gold-type);font-style:normal;text-transform:none;letter-spacing:-.02em}
 .hero-foot{display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap;margin-top:clamp(10px,1.4vw,20px);max-width:100%}
 .hero-foot p{margin:0;flex:1 1 28ch;max-width:min(40ch,100%);color:var(--cream);font-size:clamp(14px,1.15vw,17px)}
