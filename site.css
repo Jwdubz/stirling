@@ -43,7 +43,7 @@ a{color:inherit}
 .hero-film video{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center center;flex:1 1 auto}
 .hero-card{position:relative;z-index:2;flex:0 0 auto;margin-top:0;min-height:0;background:var(--ink);padding:clamp(18px,2.2vw,36px) max(var(--edge),160px) clamp(22px,2.8vw,44px) var(--edge);border-top:1px solid rgba(200,162,76,.5)}
 .hero-card .disp{font-size:clamp(40px,6.4vw,110px);line-height:.96;max-width:100%}
-.hero-card .disp .ln .title,.hero-card .disp .ln em.title{font-family:var(--serif);text-transform:none;font-style:italic;font-weight:400;color:var(--paper);letter-spacing:var(--title-track,-.03em);font-optical-sizing:auto;white-space:nowrap}
+.hero-card .disp .ln .title,.hero-card .disp .ln em.title{font-family:var(--serif);text-transform:none;font-style:italic;font-weight:400;color:var(--paper);letter-spacing:-.03em;font-optical-sizing:auto;white-space:nowrap}
 .hero-card .disp .ln:first-child em,.hero-card .disp .ln:first-child .title,.hero-card .disp .ln:first-child em.title{color:var(--paper);text-transform:none;letter-spacing:-.03em}
 .hero-card .disp .ln:last-child > span{color:var(--gold-type);font-style:normal;letter-spacing:-.02em}
 .hero-foot{display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap;margin-top:clamp(10px,1.4vw,20px);max-width:100%}
@@ -135,7 +135,7 @@ html.is-paused .loop{}
 
 /* pass7: film is cover full-bleed; keep ink behind letterbox edges if any */
 .hero,.hero-film{background:#000}
-/* Forever track must not clip under Pause on phone */
+/* Forever title must not clip under Pause on phone */
 @media (max-width:820px){
   .hero-card .disp .ln .title,.hero-card .disp .ln em.title{max-width:100%}
   .hero-film{min-height:38svh}
