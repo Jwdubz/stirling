@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1c1a17">
+<meta name="description" content="A private, local wedding-site concept for The Stirling Club in Las Vegas.">
+<title>Weddings at The Stirling Club | Private concept</title>
+<link rel="icon" href="data:,">
+<link rel="preload" href="assets/fonts/Newsreader.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="film/opening.mp4?v=6" as="video" type="video/mp4">
+<link rel="stylesheet" href="site.css?v=20">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the Experience</a>
+
+<header class="mast">
+  <a class="brand" href="#top" aria-label="The Stirling Club wedding concept home"><img src="assets/brand/logo-gold.png" width="212" height="78" alt="The Stirling Club"></a>
+  <nav aria-label="Concept navigation">
+    <a href="#club">The Club</a>
+    <a class="act" href="#visit">Visit the Club</a>
+  </nav>
+</header>
+
+<button class="motion" type="button" aria-pressed="false">Pause Film</button>
+
+<main id="main">
+  <!-- Opening: one viewport. Film fills space above the type card so Your Forever / Deserves This land on first load. -->
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="hero-film"><video class="loop" src="film/opening.mp4?v=6" poster="assets/motion/stirling-opening-poster.jpg" autoplay muted loop playsinline preload="auto"></video></div>
+    <div class="hero-card">
+      <h1 id="h1" class="disp"><span class="ln"><em>Your Forever</em></span><span class="ln"><em>Deserves This.</em></span></h1>
+      <div class="hero-foot">
+        <a class="cue" href="#night">See how the night unfolds.</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="night"></div>
+
+  <!-- Chapters: split scroll. Copy holds still on a solid side; their film and photographs pass beside it. -->
+  <section class="split" data-side="left">
+    <div class="split-copy"><div class="split-in">
+      <p class="n">I</p>
+      <h2 class="disp"><span class="ln"><span>The Moment Before</span></span><span class="ln"><em>“I Do.”</em></span></h2>
+      <p>Say your vows on the Veranda, then step outside to the patio for cocktails.</p>
+    </div></div>
+    <div class="split-media">
+      <figure class="m m-film"><video class="loop" src="film/ceremony-florals.mp4" muted loop playsinline preload="metadata"></video></figure>
+      <figure class="m"><img src="assets/photos/veranda-ceremony.jpg" width="2048" height="1110" alt="A wedding ceremony in front of the Veranda windows at The Stirling Club" loading="lazy" style="object-position:50% 45%"></figure>
+    </div>
+  </section>
+
+  <section class="split" data-side="right">
+    <div class="split-copy"><div class="split-in">
+      <p class="n">II</p>
+      <h2 class="disp"><span class="ln"><span>Your First Dance.</span></span><span class="ln"><em>Their Front-Row Seat.</em></span></h2>
+      <p>Dinner, toasts, then your song. All here, with the people who came for you.</p>
+    </div></div>
+    <div class="split-media">
+      <figure class="m"><img src="assets/photos/first-dance.jpg" width="1600" height="1067" alt="A bride and groom beginning their first dance in The Stirling Club" loading="lazy" style="object-position:30% 45%"></figure>
+      <figure class="m m-film"><video class="loop" src="film/dinner-room.mp4" muted loop playsinline preload="metadata"></video></figure>
+    </div>
+  </section>
+
+  <section class="split" data-side="left">
+    <div class="split-copy"><div class="split-in">
+      <p class="n">III</p>
+      <h2 class="disp"><span class="ln"><span>Leave Room For</span></span><span class="ln"><em>One More Song.</em></span></h2>
+      <p>The ties loosen. The dance floor fills. This is the part you don’t need to choreograph.</p>
+    </div></div>
+    <div class="split-media">
+      <figure class="m m-film"><video class="loop" src="film/celebration-party.mp4" muted loop playsinline preload="metadata"></video></figure>
+      <figure class="m"><img src="assets/photos/dance-floor.jpg" width="1600" height="1067" alt="Guests dancing beneath colorful light in The Stirling Club" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <section class="split" data-side="right">
+    <div class="split-copy"><div class="split-in">
+      <p class="n">IV</p>
+      <h2 class="disp"><span class="ln"><span>The Last Goodbye</span></span><span class="ln"><em>Takes a Little Longer.</em></span></h2>
+      <p>A few more hugs. One more photograph. Then out into the Las Vegas night.</p>
+    </div></div>
+    <div class="split-media">
+      <figure class="m"><img src="assets/photos/grand-exit.jpg" width="1920" height="1280" alt="Newlyweds walking through a joyful grand exit at The Stirling Club" loading="lazy" style="object-position:50% 30%"></figure>
+      <figure class="m m-film"><video class="loop" src="film/exit-night.mp4" muted loop playsinline preload="metadata"></video></figure>
+    </div>
+  </section>
+
+  <section class="club" id="club" aria-labelledby="h-club">
+    <div class="club-head">
+      <h2 id="h-club" class="disp"><span class="ln"><span>A Club That</span></span><span class="ln"><span>Knows How</span></span><span class="ln"><em>To Host.</em></span></h2>
+      <p>Our chefs prepare your menu in-house. Your event coordinator brings the rooms, timing and details together, so you can spend the evening with your guests.</p>
+    </div>
+    <div class="strip">
+      <figure><img src="assets/photos/spirits-portrait.jpg" width="1920" height="1280" alt="Newlyweds seated together in the Spirits Lounge at The Stirling Club" loading="lazy"></figure>
+      <figure><img src="assets/photos/champagne-tower.jpg" width="1280" height="1600" alt="A champagne tower prepared for a Stirling Club wedding" loading="lazy"></figure>
+      <figure><img src="assets/photos/elevator-kiss.jpg" width="496" height="746" alt="A couple sharing a kiss at The Stirling Club" loading="lazy"></figure>
+    </div>
+    <div class="rooms">
+      <p><strong>The Veranda</strong>A light-filled setting for your vows, with the patio just outside.</p>
+      <p><strong>The Stirling Room</strong>Gather over dinner, then stay for the dancing.</p>
+      <p><strong>The pool and terrace</strong>Take the conversation outside over cocktails.</p>
+    </div>
+  </section>
+
+  <section class="split visit" id="visit" data-side="left" aria-labelledby="h-visit">
+    <div class="split-copy"><div class="split-in">
+      <h2 id="h-visit" class="disp"><span class="ln"><span>Come Picture</span></span><span class="ln"><em>Your Day Here.</em></span></h2>
+      <p>Walk the rooms with us. Bring your ideas and questions, and tell us what you have in mind. You don’t need to be a member to marry here.</p>
+      <div class="acts">
+        <a class="btn btn-gold" href="https://crm.stirlingclubnv.com/widget/form/mRFa6U2PwNBKdghvKln2" target="_blank" rel="noopener">Arrange a Private Tour</a>
+        <a class="btn btn-line" href="https://crm.stirlingclubnv.com/widget/form/LFjedJEYPDfy3c4WNJx3" target="_blank" rel="noopener">Ask About Your Date</a>
+      </div>
+      <p class="contact"><span>2827 Paradise Road, Las Vegas</span><span>(702) 732-9700</span><span>Tours by appointment</span></p>
+    </div></div>
+    <div class="split-media">
+      <figure class="m m-tall"><img src="assets/photos/dusk-reception.jpg" width="2048" height="1152" alt="A couple photographed among the palms at Turnberry Place at dusk" loading="lazy" style="object-position:52% 50%"></figure>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>A private members' club inside Turnberry Place.</p>
+  <p class="credit">Private concept · hero opening is The Stirling Club’s own Vimeo film. Chapter loops are from Verité Wedding Films (third-party); rights for those <strong>not confirmed</strong>, do not show chapter film externally until cleared or replaced with club masters.</p>
+  <p class="word" aria-hidden="true">The Stirling Club</p>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="site.js?v=20"></script>
+</body>
+</html>
