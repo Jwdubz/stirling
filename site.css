@@ -19,6 +19,7 @@ a{color:inherit}
 .skip:focus{top:var(--edge)}
 .disp{margin:0;font-family:var(--serif);font-weight:400;text-transform:uppercase;letter-spacing:-.03em;line-height:.94;font-size:clamp(48px,7.4vw,124px)}
 .disp em{font-style:italic;text-transform:none;letter-spacing:-.02em;color:var(--gold-type);font-weight:400}
+.disp em .caps{text-transform:uppercase}
 .ln{display:block;overflow:hidden;padding:.1em 0 .28em}
 .ln>*{display:inline-block}
 
