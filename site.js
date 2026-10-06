@@ -4,51 +4,24 @@
   var root=document.documentElement,paused=false,seen=new Set();
   var vids=[].slice.call(document.querySelectorAll('video.loop'));
   vids.forEach(function(v){v.muted=true;v.defaultMuted=true;v.playsInline=true;});
-  /* hero: shrink film to visible window above rising card - fill that window top-to-bottom; side letterbox; no upscale past native */
+  /* hero film: full-bleed cover of the film window (no side letterbox). Type card stays below. */
   (function(){
     var hv=document.querySelector('.hero-film video');
     var box=document.querySelector('.hero-film');
     if(!hv||!box)return;
     function fitHero(){
-      var dpr=Math.max(1, window.devicePixelRatio||1);
-      var nw=hv.videoWidth||1920, nh=hv.videoHeight||1080;
-      var natW=Math.floor(nw/dpr), natH=Math.floor(nh/dpr);
-      var boxW=box.clientWidth, boxH=box.clientHeight;
-      var visH=Math.max(140, boxH);
-      /* phone: fill the film window (cover + side crop) so first screen is not empty letterbox */
-      if(window.matchMedia('(max-width:820px)').matches){
-        hv.style.removeProperty('--hero-max-w');
-        hv.style.removeProperty('--hero-max-h');
-        hv.style.setProperty('--hero-fit-w','100%');
-        hv.style.setProperty('--hero-fit-h','100%');
-        hv.style.width='100%';
-        hv.style.height='100%';
-        hv.style.maxWidth='none';
-        hv.style.maxHeight='none';
-        hv.style.objectFit='cover';
-        hv.style.objectPosition='center center';
-        box.style.alignItems='stretch';
-        box.style.justifyContent='stretch';
-        box.style.paddingTop='0px';
-        return;
-      }
-      hv.style.objectFit='contain';
-      hv.style.maxWidth='';
-      hv.style.maxHeight='';
-      var h=Math.min(visH, natH);
-      var w=Math.round(h*(nw/nh));
-      if(w>Math.min(boxW, natW)){
-        w=Math.min(boxW, natW);
-        h=Math.round(w*(nh/nw));
-      }
-      hv.style.setProperty('--hero-max-w', natW+'px');
-      hv.style.setProperty('--hero-max-h', natH+'px');
-      hv.style.setProperty('--hero-fit-w', w+'px');
-      hv.style.setProperty('--hero-fit-h', h+'px');
-      hv.style.width=w+'px';
-      hv.style.height=h+'px';
-      box.style.alignItems='center';
-      box.style.justifyContent='center';
+      hv.style.removeProperty('--hero-max-w');
+      hv.style.removeProperty('--hero-max-h');
+      hv.style.setProperty('--hero-fit-w','100%');
+      hv.style.setProperty('--hero-fit-h','100%');
+      hv.style.width='100%';
+      hv.style.height='100%';
+      hv.style.maxWidth='none';
+      hv.style.maxHeight='none';
+      hv.style.objectFit='cover';
+      hv.style.objectPosition='center center';
+      box.style.alignItems='stretch';
+      box.style.justifyContent='stretch';
       box.style.paddingTop='0px';
     }
     if(hv.videoWidth)fitHero();
@@ -69,27 +42,68 @@
   });
   document.addEventListener('visibilitychange',function(){if(!document.hidden)seen.forEach(play);});
 
-  /* stretch "Your Forever" letter-spacing to match caps line width (same right edge) */
+  /* Stretch "Your Forever" until visible glyph ink right edge matches "DESERVES STIRLING."
+     (layout boxes can match while italic ink still falls short of the period). */
   (function(){
     var title=document.querySelector('.hero-card .disp em.title');
     var caps=document.querySelector('.hero-card .disp .caps.gold');
     if(!title||!caps)return;
+    var canvas=document.createElement('canvas');
+    var ctx=canvas.getContext('2d',{willReadFrequently:true});
+
+    function visibleText(el){
+      var cs=getComputedStyle(el),t=el.textContent||'';
+      var tt=(cs.textTransform||'').toLowerCase();
+      if(tt==='uppercase')t=t.toUpperCase();
+      else if(tt==='lowercase')t=t.toLowerCase();
+      return t;
+    }
+    /* Rightmost opaque ink of the rendered glyphs (not the layout box). */
+    function inkRight(el){
+      var cs=getComputedStyle(el);
+      var text=visibleText(el);
+      var fontSize=parseFloat(cs.fontSize)||16;
+      var ls=cs.letterSpacing;
+      var box=el.getBoundingClientRect();
+      var w=Math.max(64, Math.ceil(box.width+96));
+      var h=Math.max(32, Math.ceil(fontSize*2.6));
+      if(canvas.width!==w)canvas.width=w;
+      if(canvas.height!==h)canvas.height=h;
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0,0,w,h);
+      ctx.font=(cs.fontStyle||'normal')+' '+(cs.fontWeight||'400')+' '+cs.fontSize+' '+cs.fontFamily;
+      if(ctx.letterSpacing!==undefined)ctx.letterSpacing=ls;
+      ctx.fillStyle='#fff';
+      ctx.textBaseline='alphabetic';
+      var x0=24;
+      ctx.fillText(text,x0,fontSize*1.4);
+      var data=ctx.getImageData(0,0,w,h).data;
+      var maxX=0;
+      for(var px=0;px<w;px++){
+        for(var py=0;py<h;py++){
+          var i4=(py*w+px)*4;
+          if(data[i4+3]>40&&data[i4]>40)maxX=px;
+        }
+      }
+      return box.left+(maxX-x0);
+    }
+
     function matchWidth(){
       title.style.letterSpacing='0px';
-      var target=caps.getBoundingClientRect().width;
-      var natural=title.getBoundingClientRect().width;
+      var target=inkRight(caps);
+      var natural=inkRight(title);
       if(!(target>0)||!(natural>0))return;
       if(natural>=target-0.5){title.style.letterSpacing='0px';return;}
-      var lo=0,hi=Math.max(8,(target-natural)*1.2),best=0;
-      for(var i=0;i<28;i++){
+      var lo=0,hi=Math.max(12,(target-natural)*1.6),best=0;
+      for(var i=0;i<32;i++){
         var mid=(lo+hi)/2;
         title.style.letterSpacing=mid+'px';
-        var w=title.getBoundingClientRect().width;
-        if(w<target){lo=mid;best=mid;}else{hi=mid;best=mid;}
+        var r=inkRight(title);
+        if(r<target){lo=mid;best=mid;}else{hi=mid;best=mid;}
       }
       title.style.letterSpacing=best.toFixed(3)+'px';
-      var w2=title.getBoundingClientRect().width,diff=target-w2;
-      if(Math.abs(diff)>0.4){
+      var r2=inkRight(title),diff=target-r2;
+      if(Math.abs(diff)>0.5){
         var gaps=Math.max(1,(title.textContent||'').length-1);
         title.style.letterSpacing=(best+diff/gaps).toFixed(3)+'px';
       }
@@ -116,7 +130,7 @@
   g.registerPlugin(ST);
   if(lenis){lenis.on('scroll',ST.update);g.ticker.add(function(t){lenis.raf(t*1000);});g.ticker.lagSmoothing(0);}
   var quart='power4.out';
-  /* opening: headline rows rise; film stays 1:1 contain (no scroll zoom - keeps native sharpness) */
+  /* opening: headline rows rise; film stays cover full-bleed in its window */
   g.from('.hero-card .ln>*',{yPercent:110,duration:1.4,ease:quart,stagger:0.1,delay:0.2});
   g.from('.hero-foot',{y:24,opacity:0,duration:1.2,ease:quart,delay:0.55});
   /* split scroll: media drift inside its frame; headline rows rise when the copy arrives */
