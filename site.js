@@ -68,6 +68,11 @@
     if(paused)vids.forEach(function(v){v.pause();});else seen.forEach(play);
   });
   document.addEventListener('visibilitychange',function(){if(!document.hidden)seen.forEach(play);});
+  /* keep Pause clear of footer wordmark */
+  var foot=document.querySelector('.foot');
+  if(foot&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){root.classList.toggle('is-over-foot',e.isIntersecting);});},{threshold:0,rootMargin:'0px 0px -8% 0px'}).observe(foot);
+  }
 
   /* fit the footer wordmark to the column */
   var word=document.querySelector('.word');

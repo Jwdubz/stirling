@@ -22,11 +22,11 @@ a{color:inherit}
 .disp em{font-style:italic;text-transform:none;letter-spacing:-.02em;color:var(--gold-type);font-weight:400}
 .disp em .caps{text-transform:uppercase}
 .hero-card .disp .ln .caps.gold{text-transform:uppercase;font-style:normal;color:var(--gold-type);letter-spacing:-.02em;white-space:nowrap}
-.ln{display:block;overflow:hidden;padding:.12em 0 .32em}
+.ln{display:block;overflow:hidden;padding:.22em .08em .42em .04em;margin:-.08em 0}
 .ln>*{display:inline-block}
 
 /* mast: small solid pills, never a gradient over the film */
-.mast{position:fixed;z-index:50;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:var(--edge);pointer-events:none}
+.mast{position:fixed;z-index:50;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:calc(var(--edge)*.72) var(--edge);pointer-events:none}
 .mast>*{pointer-events:auto}
 .brand{display:inline-flex;align-items:center;min-height:48px;background:var(--ink);padding:6px 16px;border-radius:999px}
 .brand img{width:118px;height:auto}
@@ -34,7 +34,7 @@ a{color:inherit}
 .mast nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--ink);text-decoration:none;font-size:14px;letter-spacing:.02em;transition:background .35s var(--e-quart),color .35s var(--e-quart)}
 .mast nav a.act{background:var(--gold);color:var(--ink)}
 .mast nav a:hover{background:var(--paper);color:var(--ink)}
-.motion{position:fixed;z-index:60;right:var(--edge);bottom:var(--edge);min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--gold);background:var(--ink);color:var(--paper);font:500 13px/1 var(--sans);letter-spacing:.03em;cursor:pointer}
+.motion{position:fixed;z-index:60;right:var(--edge);bottom:var(--edge);min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--gold);background:var(--ink);color:var(--paper);font:500 13px/1 var(--sans);letter-spacing:.03em;cursor:pointer;transition:opacity .35s var(--e-quart),transform .35s var(--e-quart),visibility .35s}
 .motion:hover{background:var(--gold);color:var(--ink)}
 
 /* hero: one viewport - film fills leftover above type; all type on first load */
@@ -53,7 +53,7 @@ a{color:inherit}
 .split[data-side="right"] .split-copy{order:2}
 .split:nth-of-type(odd){background:var(--cream)}
 .split-copy{position:relative}
-.split-in{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,2vw,30px);padding:clamp(90px,8vw,140px) clamp(24px,4vw,72px) clamp(40px,5vw,80px)}
+.split-in{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,2vw,30px);padding:clamp(76px,5.8vw,108px) clamp(24px,4vw,72px) clamp(40px,5vw,80px)}
 .split .disp{font-size:clamp(40px,4.9vw,86px);color:var(--ink)}
 .split .disp em{color:var(--bronze)}
 .split-in>p{margin:0;max-width:30ch;font-size:clamp(17px,1.3vw,21px);color:#3b352e}
@@ -103,7 +103,7 @@ html.is-paused .loop{}
   .mast nav a.act{min-height:44px;min-width:44px;padding:0 16px}
   .hero-card{margin-top:0;min-height:0;padding:16px var(--edge) max(56px,calc(env(safe-area-inset-bottom) + 48px)) var(--edge)}
   .hero-card .disp{font-size:clamp(34px,9.6vw,52px);line-height:.92;max-width:100%}
-  .hero-card .disp .ln{padding:.08em 0 .22em}
+  .hero-card .disp .ln{padding:.14em .06em .28em .02em}
   .split,.split[data-side="right"]{grid-template-columns:1fr}
   .split[data-side="right"] .split-copy{order:0}
   .split-in{position:relative;height:auto;padding:56px var(--edge) 24px;gap:16px}
@@ -125,7 +125,8 @@ html.is-paused .loop{}
   .word{margin-top:28px!important}
   .hero-film{min-height:42svh}
 }
-.foot{padding-bottom:84px}
+.foot{padding-bottom:max(110px,calc(env(safe-area-inset-bottom) + 88px))}
+html.is-over-foot .motion{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(10px)}
 
 /* pass7: pure black letterbox outside hero film */
 .hero,.hero-film{background:#000}
