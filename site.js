@@ -4,24 +4,51 @@
   var root=document.documentElement,paused=false,seen=new Set();
   var vids=[].slice.call(document.querySelectorAll('video.loop'));
   vids.forEach(function(v){v.muted=true;v.defaultMuted=true;v.playsInline=true;});
-  /* hero film: full-bleed cover of the film window (no side letterbox). Type card stays below. */
+  /* hero: shrink film to visible window above rising card - fill that window top-to-bottom; side letterbox; no upscale past native */
   (function(){
     var hv=document.querySelector('.hero-film video');
     var box=document.querySelector('.hero-film');
     if(!hv||!box)return;
     function fitHero(){
-      hv.style.removeProperty('--hero-max-w');
-      hv.style.removeProperty('--hero-max-h');
-      hv.style.setProperty('--hero-fit-w','100%');
-      hv.style.setProperty('--hero-fit-h','100%');
-      hv.style.width='100%';
-      hv.style.height='100%';
-      hv.style.maxWidth='none';
-      hv.style.maxHeight='none';
-      hv.style.objectFit='cover';
-      hv.style.objectPosition='center center';
-      box.style.alignItems='stretch';
-      box.style.justifyContent='stretch';
+      var dpr=Math.max(1, window.devicePixelRatio||1);
+      var nw=hv.videoWidth||1920, nh=hv.videoHeight||1080;
+      var natW=Math.floor(nw/dpr), natH=Math.floor(nh/dpr);
+      var boxW=box.clientWidth, boxH=box.clientHeight;
+      var visH=Math.max(140, boxH);
+      /* phone: fill the film window (cover + side crop) so first screen is not empty letterbox */
+      if(window.matchMedia('(max-width:820px)').matches){
+        hv.style.removeProperty('--hero-max-w');
+        hv.style.removeProperty('--hero-max-h');
+        hv.style.setProperty('--hero-fit-w','100%');
+        hv.style.setProperty('--hero-fit-h','100%');
+        hv.style.width='100%';
+        hv.style.height='100%';
+        hv.style.maxWidth='none';
+        hv.style.maxHeight='none';
+        hv.style.objectFit='cover';
+        hv.style.objectPosition='center center';
+        box.style.alignItems='stretch';
+        box.style.justifyContent='stretch';
+        box.style.paddingTop='0px';
+        return;
+      }
+      hv.style.objectFit='contain';
+      hv.style.maxWidth='';
+      hv.style.maxHeight='';
+      var h=Math.min(visH, natH);
+      var w=Math.round(h*(nw/nh));
+      if(w>Math.min(boxW, natW)){
+        w=Math.min(boxW, natW);
+        h=Math.round(w*(nh/nw));
+      }
+      hv.style.setProperty('--hero-max-w', natW+'px');
+      hv.style.setProperty('--hero-max-h', natH+'px');
+      hv.style.setProperty('--hero-fit-w', w+'px');
+      hv.style.setProperty('--hero-fit-h', h+'px');
+      hv.style.width=w+'px';
+      hv.style.height=h+'px';
+      box.style.alignItems='center';
+      box.style.justifyContent='center';
       box.style.paddingTop='0px';
     }
     if(hv.videoWidth)fitHero();
@@ -58,7 +85,7 @@
   g.registerPlugin(ST);
   if(lenis){lenis.on('scroll',ST.update);g.ticker.add(function(t){lenis.raf(t*1000);});g.ticker.lagSmoothing(0);}
   var quart='power4.out';
-  /* opening: headline rows rise; film stays cover full-bleed in its window */
+  /* opening: headline rows rise; film stays contained/letterboxed in its window */
   g.from('.hero-card .ln>*',{yPercent:110,duration:1.4,ease:quart,stagger:0.1,delay:0.2});
   /* split scroll: media drift inside its frame; headline rows rise when the copy arrives */
   g.utils.toArray('.m').forEach(function(f){
