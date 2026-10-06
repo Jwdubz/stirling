@@ -14,8 +14,27 @@
       var nw=hv.videoWidth||1920, nh=hv.videoHeight||1080;
       var natW=Math.floor(nw/dpr), natH=Math.floor(nh/dpr);
       var boxW=box.clientWidth, boxH=box.clientHeight;
-      /* film box is already the leftover above the type card (one viewport) */
       var visH=Math.max(140, boxH);
+      /* phone: fill the film window (cover + side crop) so first screen is not empty letterbox */
+      if(window.matchMedia('(max-width:820px)').matches){
+        hv.style.removeProperty('--hero-max-w');
+        hv.style.removeProperty('--hero-max-h');
+        hv.style.setProperty('--hero-fit-w','100%');
+        hv.style.setProperty('--hero-fit-h','100%');
+        hv.style.width='100%';
+        hv.style.height='100%';
+        hv.style.maxWidth='none';
+        hv.style.maxHeight='none';
+        hv.style.objectFit='cover';
+        hv.style.objectPosition='center center';
+        box.style.alignItems='stretch';
+        box.style.justifyContent='stretch';
+        box.style.paddingTop='0px';
+        return;
+      }
+      hv.style.objectFit='contain';
+      hv.style.maxWidth='';
+      hv.style.maxHeight='';
       var h=Math.min(visH, natH);
       var w=Math.round(h*(nw/nh));
       if(w>Math.min(boxW, natW)){
@@ -49,6 +68,37 @@
     if(paused)vids.forEach(function(v){v.pause();});else seen.forEach(play);
   });
   document.addEventListener('visibilitychange',function(){if(!document.hidden)seen.forEach(play);});
+
+  /* stretch "Your Forever" letter-spacing to match caps line width (same right edge) */
+  (function(){
+    var title=document.querySelector('.hero-card .disp em.title');
+    var caps=document.querySelector('.hero-card .disp .caps.gold');
+    if(!title||!caps)return;
+    function matchWidth(){
+      title.style.letterSpacing='0px';
+      var target=caps.getBoundingClientRect().width;
+      var natural=title.getBoundingClientRect().width;
+      if(!(target>0)||!(natural>0))return;
+      if(natural>=target-0.5){title.style.letterSpacing='0px';return;}
+      var lo=0,hi=Math.max(8,(target-natural)*1.2),best=0;
+      for(var i=0;i<28;i++){
+        var mid=(lo+hi)/2;
+        title.style.letterSpacing=mid+'px';
+        var w=title.getBoundingClientRect().width;
+        if(w<target){lo=mid;best=mid;}else{hi=mid;best=mid;}
+      }
+      title.style.letterSpacing=best.toFixed(3)+'px';
+      var w2=title.getBoundingClientRect().width,diff=target-w2;
+      if(Math.abs(diff)>0.4){
+        var gaps=Math.max(1,(title.textContent||'').length-1);
+        title.style.letterSpacing=(best+diff/gaps).toFixed(3)+'px';
+      }
+    }
+    function run(){matchWidth();requestAnimationFrame(matchWidth);}
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(run);else run();
+    addEventListener('resize',run);
+    setTimeout(run,200);setTimeout(run,600);setTimeout(run,1400);
+  })();
 
   /* fit the footer wordmark to the column */
   var word=document.querySelector('.word');
