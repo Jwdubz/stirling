@@ -137,3 +137,7 @@ html.is-over-foot .motion{opacity:0;visibility:hidden;pointer-events:none;transf
   .hero-film{min-height:38svh}
   .hero-card{padding-bottom:max(64px,calc(env(safe-area-inset-bottom) + 56px))}
 }
+
+/* Pass 54: club-owned chapter films; orphan-safe headline rows (fit in JS); phone hero crop */
+@media (max-width:820px){ .hero-film video{object-position:center 42%} }
+.split-copy,.split-in,.split .disp,.club-head{min-width:0}

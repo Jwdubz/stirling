@@ -26,7 +26,7 @@
         hv.style.maxWidth='none';
         hv.style.maxHeight='none';
         hv.style.objectFit='cover';
-        hv.style.objectPosition='center center';
+        hv.style.objectPosition='center 42%';
         box.style.alignItems='stretch';
         box.style.justifyContent='stretch';
         box.style.paddingTop='0px';
@@ -74,6 +74,30 @@
     new IntersectionObserver(function(es){es.forEach(function(e){root.classList.toggle('is-over-foot',e.isIntersecting);});},{threshold:0,rootMargin:'0px 0px -8% 0px'}).observe(foot);
   }
 
+  /* pass 54: every headline row stays on one line (no one-word orphans) - shrink the heading until its longest row fits */
+  function fitRows(){
+    document.querySelectorAll('.split .disp, .club .disp').forEach(function(h){
+      h.style.fontSize='';
+      var rows=[].slice.call(h.querySelectorAll('.ln>*'));
+      rows.forEach(function(r){r.style.whiteSpace='';});
+      var box=h.parentNode, cs=getComputedStyle(box);
+      var a=box.clientWidth-parseFloat(cs.paddingLeft||0)-parseFloat(cs.paddingRight||0)-4;
+      var base=parseFloat(getComputedStyle(h).fontSize), ratio=1;
+      rows.forEach(function(r){
+        var probe=document.createElement('span');
+        probe.style.cssText='position:absolute;visibility:hidden;white-space:nowrap;left:-9999px;top:0';
+        probe.style.font=getComputedStyle(r).font; probe.style.letterSpacing=getComputedStyle(r).letterSpacing;
+        probe.style.textTransform=getComputedStyle(r).textTransform;
+        probe.innerHTML=r.innerHTML; document.body.appendChild(probe);
+        var w=probe.getBoundingClientRect().width+parseFloat(getComputedStyle(r.parentNode).paddingLeft||0)*2;
+        document.body.removeChild(probe);
+        if(a>0&&w>a) ratio=Math.min(ratio,a/w);
+      });
+      if(ratio<1) h.style.fontSize=(base*ratio*0.97).toFixed(2)+'px';
+      rows.forEach(function(r){r.style.whiteSpace='nowrap';});
+    });
+  }
+  (document.fonts?document.fonts.ready:Promise.resolve()).then(fitRows);addEventListener('resize',fitRows);fitRows();
   /* fit the footer wordmark to the column */
   var word=document.querySelector('.word');
   function fit(){if(!word)return;word.style.setProperty('--wfs','10vw');var w=word.scrollWidth,a=word.parentNode.clientWidth-2*parseFloat(getComputedStyle(word.parentNode).paddingLeft||0);
