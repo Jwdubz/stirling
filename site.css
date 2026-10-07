@@ -141,3 +141,6 @@ html.is-over-foot .motion{opacity:0;visibility:hidden;pointer-events:none;transf
 /* Pass 54: club-owned chapter films; orphan-safe headline rows (fit in JS); phone hero crop */
 @media (max-width:820px){ .hero-film video{object-position:center 42%} }
 .split-copy,.split-in,.split .disp,.club-head{min-width:0}
+
+/* pre-send: no one-word last lines in body copy */
+p,li,blockquote,figcaption{text-wrap:pretty}
