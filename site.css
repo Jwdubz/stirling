@@ -32,7 +32,7 @@ a{color:inherit}
 .brand img{width:118px;height:auto}
 .mast nav{display:flex;gap:6px}
 .mast nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--ink);text-decoration:none;font-size:14px;letter-spacing:.02em;transition:background .35s var(--e-quart),color .35s var(--e-quart)}
-.mast nav a.act{background:var(--gold);color:var(--ink)}
+.mast nav a.act{background:var(--gold);color:var(--ink);font-weight:700}
 .mast nav a:hover{background:var(--paper);color:var(--ink)}
 .motion{position:fixed;z-index:60;right:var(--edge);bottom:var(--edge);min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--gold);background:var(--ink);color:var(--paper);font:500 14px/1 var(--sans);letter-spacing:.03em;cursor:pointer;transition:opacity .35s var(--e-quart),transform .35s var(--e-quart),visibility .35s}
 .motion:hover{background:var(--gold);color:var(--ink)}
