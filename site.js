@@ -140,7 +140,7 @@
     var words=row.textContent.trim().split(/\s+/);
     row.textContent='';
     words.forEach(function(w,k){
-      var s=document.createElement('span'); s.className='w'; s.style.setProperty('--i',i++); s.textContent=w;
+      var s=document.createElement('span'); s.className='w'; s.style.setProperty('--d',([1,2,3,6][i++]||6)+'s'); s.textContent=w;
       row.appendChild(s); if(k<words.length-1) row.appendChild(document.createTextNode(' '));
     });
   });
