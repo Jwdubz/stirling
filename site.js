@@ -66,7 +66,7 @@
     paused=!paused;root.classList.toggle('is-paused',paused);
     btn.textContent=paused?'Play Film':'Pause Film';btn.setAttribute('aria-pressed',String(paused));
     if(paused)vids.forEach(function(v){v.pause();});else seen.forEach(play);
-    /* Pause freezes all motion: GSAP + smooth scroll */ if(window.gsap){gsap.globalTimeline[paused?'pause':'resume']();}if(typeof lenis!=='undefined'&&lenis){paused?lenis.stop():lenis.start();}
+    /* Pause freezes all motion: GSAP + smooth scroll */ if(window.gsap){gsap.globalTimeline[paused?'pause':'resume']();}if(typeof lenis!=='undefined'&&lenis){lenis.options.smoothWheel=!paused;}
   });
   document.addEventListener('visibilitychange',function(){if(!document.hidden)seen.forEach(play);});
   /* keep Pause clear of footer wordmark */
