@@ -114,8 +114,7 @@
   g.registerPlugin(ST);
   if(lenis){lenis.on('scroll',ST.update);g.ticker.add(function(t){lenis.raf(t*1000);});g.ticker.lagSmoothing(0);}
   var quart='power4.out';
-  /* opening: headline rows rise; film stays contained/letterboxed in its window */
-  g.from('.hero-card .ln>*',{yPercent:120,duration:1.4,ease:quart,stagger:1,delay:0.2});
+  /* opening headline: per-word reveal lives at the end of this file */
   /* split scroll: media drift inside its frame; headline rows rise when the copy arrives */
   g.utils.toArray('.m').forEach(function(f){
     var el=f.querySelector('img,video');
@@ -130,4 +129,22 @@
     g.fromTo(im,{'--ms':1.14},{'--ms':1,ease:'none',scrollTrigger:{trigger:im,start:'top bottom',end:'bottom top',scrub:true}});
   });
   g.from('.word',{yPercent:60,opacity:0,duration:1.4,ease:quart,scrollTrigger:{trigger:'.foot',start:'top 85%'}});
+})();
+
+/* Stirling hero: one word every 2s, starts when the heading scrolls into view */
+(function(){
+  var h=document.querySelector('.hero-card .disp'); if(!h) return;
+  var i=0;
+  h.querySelectorAll('.ln>*').forEach(function(row){
+    var words=row.textContent.trim().split(/\s+/);
+    row.textContent='';
+    words.forEach(function(w,k){
+      var s=document.createElement('span'); s.className='w'; s.style.setProperty('--i',i++); s.textContent=w;
+      row.appendChild(s); if(k<words.length-1) row.appendChild(document.createTextNode(' '));
+    });
+  });
+  if(!('IntersectionObserver' in window)){h.classList.add('is-in');return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){h.classList.add('is-in');io.disconnect();}})},{threshold:.4});
+  io.observe(h);
 })();
